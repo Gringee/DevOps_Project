@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <title>My TODO List</title>
+</head>
+<body>
+    <h1>My TODO List</h1>
+    
+    <form method="POST" action="{{ url_for('index') }}">
+        <input type="text" name="task" placeholder="Dodaj zadanie..." required>
+        <button type="submit">Dodaj</button>
+    </form>
+
+    <ul>
+        {% for task in tasks %}
+        <li>
+            {{ task }}
+            <a href="{{ url_for('delete_task', task_index=loop.index0) }}">Usuń</a>
+        </li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
