@@ -3,9 +3,25 @@
 
 {% block content %}
 <div class="text-center">
-    <h1>Witaj w TODOApp!</h1>
-    <p>Prosta aplikacja do zarządzania zadaniami.</p>
-    <a href="{{ url_for('login') }}" class="btn btn-primary">Zaloguj się</a>
-    <a href="{{ url_for('register') }}" class="btn btn-secondary">Zarejestruj się</a>
+    <h1 class="display-4">Witaj w TODOApp!</h1>
+    <p class="lead">
+        Prosta aplikacja do zarządzania zadaniami, korzystająca z Flask, Flask-Login i bazy danych.
+    </p>
+    <hr class="my-4">
+
+    {% if current_user.is_authenticated %}
+    <!-- Jeśli zalogowany, witaj użytkownika i pokaż przycisk do listy zadań -->
+    <p>Witaj, <strong>{{ current_user.username }}</strong>! Miłego planowania zadań.</p>
+    <a href="{{ url_for('index') }}" class="btn btn-primary btn-lg">Przejdź do moich zadań</a>
+
+    <!-- Przycisk wylogowania można dodać też tutaj (lub tylko w nawigacji, jak w base.html). -->
+    <a href="{{ url_for('logout') }}" class="btn btn-outline-danger btn-lg ms-3">Wyloguj</a>
+
+    {% else %}
+    <!-- Jeśli niezalogowany, zachęć do logowania lub rejestracji -->
+    <p>Zaloguj się, by zarządzać swoimi zadaniami, lub załóż konto zupełnie za darmo!</p>
+    <a href="{{ url_for('login') }}" class="btn btn-success btn-lg">Zaloguj się</a>
+    <a href="{{ url_for('register') }}" class="btn btn-info btn-lg ms-3">Zarejestruj się</a>
+    {% endif %}
 </div>
 {% endblock %}
